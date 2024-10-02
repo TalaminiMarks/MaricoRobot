@@ -1,15 +1,11 @@
 import 'dotenv/config'
 
-import express from "express";
+import { Client, Events, GatewayIntentBits } from 'discord.js'
 
-const app = express();
+const app = new Client({ intents: [GatewayIntentBits.Guilds] })
 
-const port = 3000;
-
-app.get("/", (req, res)=>{
-  res.send("Pagina")
+app.once(Events.ClientReady, clientReady =>{
+  console.log("Ready! Logged as "+ clientReady.user.tag)
 })
 
-app.listen(port, ()=>{
-  console.log("Running on http://localhost:3000")
-})
+app.login(process.env.DISCORD_TOKEN)
