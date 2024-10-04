@@ -9,7 +9,8 @@
     "node": ">=18.x"
   },
   "scripts": {
-    "dev": "node app.js"
+    "dev": "node app.js",
+    "register": "node deploy-commands.js"
   },
   "keywords": [
     "discord",
