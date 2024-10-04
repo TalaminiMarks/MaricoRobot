@@ -28,8 +28,13 @@ for (const folder of commandFolders) {
 	}
 }
 
-// app.once(Events.ClientReady, clientReady => {
-// 	console.log('Ready! Logged as ' + clientReady.user.tag);
-// });
+app.on(Events.InteractionCreate, interaction => {
+	if (!interaction.isChatInputCommand()) return;
+	console.log(interaction);
+});
 
-// app.login(process.env.DISCORD_TOKEN);
+app.once(Events.ClientReady, clientReady => {
+	console.log('Ready! Logged as ' + clientReady.user.tag);
+});
+
+app.login(process.env.DISCORD_TOKEN);
