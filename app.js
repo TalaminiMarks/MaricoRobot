@@ -14,8 +14,8 @@ const commandFolders = fs.readdirSync(commandPath);
 
 for (const folder of commandFolders) {
 	const utilityPath = path.join(commandPath, folder);
-	const commandFiles = fs.readdirSync(utilityPath).filter(file => file.endsWith('.js'));
-	for (const file of commandFiles) {
+	const utilityFiles = fs.readdirSync(utilityPath).filter(file => file.endsWith('.js'));
+	for (const file of utilityFiles) {
 		const filePath = path.join(utilityPath, file);
 		const command = require(filePath);
 		if ('data' in command && 'execute' in command) {
