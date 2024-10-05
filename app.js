@@ -9,14 +9,14 @@ const app = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 app.commands = new Collection();
 
-const foldersPath = path.join(__dirname, 'commands');
-const commandFolders = fs.readdirSync(foldersPath);
+const commandPath = path.join(__dirname, 'commands');
+const commandFolders = fs.readdirSync(commandPath);
 
 for (const folder of commandFolders) {
-	const commandPath = path.join(foldersPath, folder);
-	const commandFiles = fs.readdirSync(commandPath).filter(file => file.endsWith('.js'));
+	const utilityPath = path.join(commandPath, folder);
+	const commandFiles = fs.readdirSync(utilityPath).filter(file => file.endsWith('.js'));
 	for (const file of commandFiles) {
-		const filePath = path.join(commandPath, file);
+		const filePath = path.join(utilityPath, file);
 		const command = require(filePath);
 		if ('data' in command && 'execute' in command) {
 			app.commands.set(command.data.name, command);
@@ -42,4 +42,5 @@ for (const file of eventsFile) {
 		app.on(event.name, (...args) => event.execute(...args));
 	}
 }
+
 app.login(process.env.DISCORD_TOKEN);
