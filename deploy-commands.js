@@ -32,7 +32,7 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 		console.log(`Started refleshing ${commands.length} application (/) commands.`);
 
 		const data = await rest.put(
-			Routes.applicationGuildCommands(process.env.APP_ID, process.env.GUILD_ID),
+			Routes.applicationCommands(process.env.APP_ID),
 			{ body: commands },
 		);
 
