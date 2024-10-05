@@ -3,10 +3,10 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('server')
-		.setDescription('Provides information abount the server.'),
+		.setDescription('Entrega informações sobre o servidor.'),
 	async execute(interaction) {
 		await interaction.reply(
-			`This server is ${interaction.guild.name} and has ${interaction.guild.memberCount} members.`,
+			`Esse servidor é o ${interaction.guild.name} e tem ${interaction.guild.memberCount} membros.`,
 		);
 	},
 };
