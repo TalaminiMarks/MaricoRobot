@@ -30,16 +30,13 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 (async () => {
 	try {
 		console.log(`Started refleshing ${commands.length} application (/) commands.`);
-
 		const data = await rest.put(
 			Routes.applicationCommands(process.env.APP_ID),
 			{ body: commands },
 		);
-
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
 	}
 	catch (error) {
 		console.log(error);
 	}
 })();
-
