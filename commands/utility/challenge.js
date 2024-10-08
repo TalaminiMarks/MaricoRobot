@@ -22,34 +22,49 @@ module.exports = {
 		await scheduler.wait(1000);
 
 		const choices = ['pedra', 'papel', 'tesoura'];
-		const botChoice = Math.round((Math.random() * 100) % 2);
+		const botChoice = Math.floor((Math.random() * 100) % 3);
 
 		await interaction.editReply({
 			content: `<@${interaction.user.id}> tu escolheu ${capitalize(interaction.options.getString('input'))}, eu escolhi ${capitalize(choices[botChoice])}.`,
 		});
 
-		if (interaction.options.getString('input') === 'pedra' && choices[botChoice] === 'papel') {
-			await interaction.followUp('Ganhei! ' + getRandomEmoji());
-		}
-		else if (interaction.options.getString('input') === 'papel' && choices[botChoice] === 'pedra') {
-			await interaction.followUp('Tu ganhou! ' + '👹');
-		}
-		else if (interaction.options.getString('input') === 'tesoura' && choices[botChoice] === 'papel') {
-			await interaction.followUp('Tu ganhou! ' + '👹');
-		}
-		else if (interaction.options.getString('input') === 'papel' && choices[botChoice] === 'tesoura') {
-			await interaction.followUp('Ganhei! ' + getRandomEmoji());
-		}
-		else if (interaction.options.getString('input') === 'pedra' && choices[botChoice] === 'tesoura') {
-			await interaction.followUp('Tu ganhou! ' + '👹');
-		}
-		else if (interaction.options.getString('input') === 'tesoura' && choices[botChoice] === 'pedra') {
-			await interaction.followUp('Ganhei! ' + getRandomEmoji());
-		}
-		else {
-			await interaction.followUp('Empate! ' + getRandomEmoji());
-		}
+		const choicesObj = {
+			'papel': async (bot) => {
+				if (bot === 'pedra') {
+					await interaction.followUp('Tu ganhou! ' + '👹');
+				}
+				else if (bot === 'tesoura') {
+					await interaction.followUp('Ganhei! ' + getRandomEmoji());
+				}
+				else {
+					await interaction.followUp('Empate! ' + getRandomEmoji());
+				}
+			},
+			'pedra': async (bot) => {
+				if (bot === 'papel') {
+					await interaction.followUp('Ganhei! ' + getRandomEmoji());
+				}
+				else if (bot === 'tesoura') {
+					await interaction.followUp('Tu ganhou! ' + '👹');
+				}
+				else {
+					await interaction.followUp('Empate! ' + getRandomEmoji());
+				}
+			},
+			'tesoura': async (bot) => {
+				if (bot === 'papel') {
+					await interaction.followUp('Tu ganhou! ' + '👹');
+				}
+				else if (bot === 'pedra') {
+					await interaction.followUp('Ganhei! ' + getRandomEmoji());
+				}
+				else {
+					await interaction.followUp('Empate! ' + getRandomEmoji());
+				}
+			},
+		};
 
-
+		const result = choicesObj[interaction.options.getString('input')];
+		result(choices[botChoice]);
 	},
 };
