@@ -6,6 +6,8 @@ module.exports = {
 		.setDescription('comando para criar um personagem de RPG'),
 
 	async execute(interaction) {
+		console.log(interaction.client);
+
 		interaction.reply('teste');
 	},
 };
