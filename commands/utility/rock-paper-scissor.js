@@ -4,6 +4,7 @@ const { scheduler } = require('node:timers/promises');
 const { capitalize, getRandomEmoji } = require('../../utils');
 
 module.exports = {
+	// Define o nome, descrição e as opções para o comando
 	data: new SlashCommandBuilder()
 		.setName('pedra-papel-tesoura')
 		.setDescription('Joga Pedra Papel Tesoura com o bot')
@@ -18,16 +19,20 @@ module.exports = {
 				),
 		),
 	async execute(interaction) {
+		// Deixa uma mensagem temporaria
 		await interaction.deferReply();
 		await scheduler.wait(1000);
 
+		// Cria as opções para o bot escolher no RNG
 		const choices = ['pedra', 'papel', 'tesoura'];
 		const botChoice = Math.floor((Math.random() * 100) % 3);
 
+		// Edita a mensagem respondendo o que o usuário escolheu e o que o bot escolheu
 		await interaction.editReply({
 			content: `<@${interaction.user.id}> tu escolheu ${capitalize(interaction.options.getString('input'))}, eu escolhi ${capitalize(choices[botChoice])}.`,
 		});
 
+		// Objeto para as verificações de quem ganhou
 		const choicesObj = {
 			'papel': async (bot) => {
 				if (bot === 'pedra') {
@@ -64,6 +69,7 @@ module.exports = {
 			},
 		};
 
+		// Executa as funções dentro do objeto de verificação
 		const result = choicesObj[interaction.options.getString('input')];
 		result(choices[botChoice]);
 	},

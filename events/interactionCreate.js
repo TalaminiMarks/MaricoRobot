@@ -1,10 +1,12 @@
 const { Events } = require('discord.js');
 
+// Evento de interação com o bot
 module.exports = {
 	name: Events.InteractionCreate,
 	async execute(interaction) {
 		if (!interaction.isChatInputCommand()) return;
 
+		// Recupera o comando da coleção 'commands' da aplicação
 		const command = interaction.client.commands.get(interaction.commandName);
 
 		if (!command) {
@@ -12,6 +14,7 @@ module.exports = {
 			return;
 		}
 
+		// Tenta executar a função 'execute' do comando
 		try {
 			await command.execute(interaction);
 		}

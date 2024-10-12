@@ -1,5 +1,6 @@
 const { Events } = require('discord.js');
 
+// Evento quando o cliente está 'ready'
 module.exports = {
 	name: Events.ClientReady,
 	once: true,
