@@ -3,7 +3,7 @@ dotenv.config();
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, GatewayIntentBits, Events, ChannelType } = require('discord.js');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
 
 // Instancia da aplicação. As Intents são um teste
 const app = new Client({ intents: [
@@ -55,21 +55,6 @@ for (const file of eventsFile) {
 		app.on(event.name, (...args) => event.execute(...args));
 	}
 }
-
-// Lugar de teste
-// app.on(Events.InteractionCreate, interaction => {
-// 	if (!interaction.isChatInputCommand()) return;
-
-// 	const channelteste = interaction.guild.channels.create({
-// 		name: 'teste',
-// 		type: ChannelType.GuildCategory,
-// 	})
-// 		.then(console.log)
-// 		.catch(console.error);
-
-// 	await channelteste.
-
-// });
 
 // Login do bot
 app.login(process.env.DISCORD_TOKEN);
