@@ -6,4 +6,7 @@ module.exports = {
 		const emojiList = ['😭', '😄', '😌', '🤓', '😎', '😤', '🤖', '😶‍🌫️', '🌏', '📸', '💿', '👋', '🌊', '✨'];
 		return emojiList[Math.floor(Math.random() * emojiList.length)];
 	},
+	async sendMessage(interaction, channelId, string) {
+		await interaction.client.channels.cache.get(channelId).send(string);
+	},
 };
