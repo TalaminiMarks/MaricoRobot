@@ -1,4 +1,5 @@
-const { SlashCommandBuilder, ChannelType } = require('discord.js');
+const { Interaction, SlashCommandBuilder, ChannelType } = require('discord.js');
+const { sendMessage } = require('../../utils');
 
 module.exports = {
 	// Define nome, descrição, tamanho min e max, e se é obrigatório
@@ -14,6 +15,11 @@ module.exports = {
 				.setMaxLength(99),
 		),
 	// Função de execução do comando
+
+	/**
+	 * @param {Interaction} interaction
+	 */
+
 	async execute(interaction) {
 		// Começa a interação com o bot mandando uma mensagem
 		await interaction.reply({ content: 'Criando canal...', fetchReply: true });
@@ -24,6 +30,8 @@ module.exports = {
 		const createCategory = '** Criando Personagem **';
 		// Define uma variavel que vai guardar o ID da categoria de criação de personagem
 		let categoryId = undefined;
+		// Armazena o id do canal recem criado
+		let newChannelId = 0;
 
 		try {
 			// Procura nos canais do servidor a categoria de criação de personagem e atribui na variavel categoryId
@@ -46,6 +54,7 @@ module.exports = {
 				})
 					.then(channel => {
 						channel.setParent(category.id);
+						newChannelId = channel.id;
 					});
 			}
 			// Se já existir a categoria, so vai criar o canal e mover ele pra categoria
@@ -56,15 +65,22 @@ module.exports = {
 				})
 					.then(channel => {
 						channel.setParent(categoryId);
+						newChannelId = channel.id;
 					});
 			}
 			// Edita a mensagem primeiramente enviada
 			await interaction.editReply({ content:'Canal Criado!' });
 		}
-		// Pega algum erro, se acontecer e edita a mensagem do bot falando que deu algum erro
+		// Pega algum erro, se acontecer e edita a mensagem do bot falando que deu algum erro na criação do canal
 		catch (error) {
 			console.log(error);
 			await interaction.editReply({ content: 'Erro ao criar o canal' });
 		}
+
+		try {
+			await sendMessage(interaction, newChannelId, 'Alo');
+		}
+		catch (error) {console.log(error);}
+
 	},
 };
