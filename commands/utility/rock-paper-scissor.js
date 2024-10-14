@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, userMention } = require('discord.js');
 const { scheduler } = require('node:timers/promises');
 
 const { capitalize, getRandomEmoji } = require('../../utils');
@@ -29,7 +29,7 @@ module.exports = {
 
 		// Edita a mensagem respondendo o que o usuário escolheu e o que o bot escolheu
 		await interaction.editReply({
-			content: `<@${interaction.user.id}> tu escolheu ${capitalize(interaction.options.getString('input'))}, eu escolhi ${capitalize(choices[botChoice])}.`,
+			content: `${userMention(interaction.user.id)} tu escolheu ${capitalize(interaction.options.getString('input'))}, eu escolhi ${capitalize(choices[botChoice])}.`,
 		});
 
 		// Objeto para as verificações de quem ganhou
