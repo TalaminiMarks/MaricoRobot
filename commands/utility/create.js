@@ -1,5 +1,6 @@
-const { Interaction, SlashCommandBuilder, ChannelType } = require('discord.js');
-const { sendMessage } = require('../../utils');
+// eslint-disable-next-line no-unused-vars
+const { Interaction, SlashCommandBuilder, ChannelType, userMention } = require('discord.js');
+const { sendMessage, getRandomEmoji } = require('../../utils');
 
 module.exports = {
 	// Define nome, descrição, tamanho min e max, e se é obrigatório
@@ -69,18 +70,14 @@ module.exports = {
 					});
 			}
 			// Edita a mensagem primeiramente enviada
-			await interaction.editReply({ content:'Canal Criado!' });
+			await interaction.editReply({ content:'Canal Criado! Execute o comando /criar-personagem lá ' + getRandomEmoji() });
+			// Função para enviar uma mensagem simples em um canal pelo ID
+			await sendMessage(interaction, newChannelId, `${userMention(interaction.user.id)} Execute o comando /criar-personagem nesse canal para começar o processo ${getRandomEmoji()}`);
 		}
 		// Pega algum erro, se acontecer e edita a mensagem do bot falando que deu algum erro na criação do canal
 		catch (error) {
 			console.log(error);
 			await interaction.editReply({ content: 'Erro ao criar o canal' });
 		}
-
-		try {
-			await sendMessage(interaction, newChannelId, 'Alo');
-		}
-		catch (error) {console.log(error);}
-
 	},
 };
