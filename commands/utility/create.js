@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Interaction, SlashCommandBuilder, ChannelType, userMention, resolveColor, PermissionsBitField } = require('discord.js');
+const { Interaction, SlashCommandBuilder, ChannelType, userMention, resolveColor } = require('discord.js');
 const { sendMessage, getRandomEmoji, capitalize } = require('../../utils');
 
 module.exports = {
