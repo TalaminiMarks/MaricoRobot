@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Interaction, SlashCommandBuilder, ChannelType, userMention, Colors } = require('discord.js');
+const { Interaction, SlashCommandBuilder, ChannelType, userMention, resolveColor, PermissionsBitField } = require('discord.js');
 const { sendMessage, getRandomEmoji, capitalize } = require('../../utils');
 
 module.exports = {
@@ -23,7 +23,7 @@ module.exports = {
 
 	async execute(interaction) {
 		// Começa a interação com o bot mandando uma mensagem
-		await interaction.reply({ content: 'Criando canal...', fetchReply: true });
+		await interaction.reply({ content: 'Criando canal...' });
 
 		// Recupera o valor que foi informado pelo usuário
 		const charName = interaction.options.getString('nome');
@@ -42,36 +42,52 @@ module.exports = {
 					categoryId = channels.findKey(channel => channel.name === createCategory);
 				});
 
+			// Cria um cargo com o nome do personagem
+			const role = await interaction.guild.roles.create({ name: capitalize(charName), color: resolveColor('Random') });
+
 			// Se não existir a categoria vai criar a categoria e o canal pra criação do personagem e move o canal pra categoria
 			if (!categoryId) {
+				// Cria a categoria
 				const category = await interaction.guild.channels.create({
 					name: createCategory,
 					type: ChannelType.GuildCategory,
 				});
 
+				// Cria o canal com o nome do personagem
 				await interaction.guild.channels.create({
-					name: capitalize(charName),
+					name: charName,
 					type: ChannelType.GuildText,
 				})
 					.then(channel => {
+						// Move o canal para a categoria criada
 						channel.setParent(category.id);
+						// Atribui no canal criado o cargo criado para criar o personagem
+						channel.permissionOverwrites.edit(interaction.client.user.id, { ViewChannel: true });
+						channel.permissionOverwrites.edit(role.id, { ViewChannel: true });
+						channel.permissionOverwrites.edit(channel.guild.id, { ViewChannel: false });
 						newChannelId = channel.id;
 					});
 			}
 			// Se já existir a categoria, so vai criar o canal e mover ele pra categoria
 			else {
+				// Cria o canal com o nome do personagem
 				await interaction.guild.channels.create({
-					name: capitalize(charName),
+					name: charName,
 					type: ChannelType.GuildText,
 				})
 					.then(channel => {
+						// Move o canal para a categoria de criação de personagem
 						channel.setParent(categoryId);
+						// Atribui no canal criado o cargo criado para criar o personagem
+						channel.permissionOverwrites.edit(interaction.client.user.id, { ViewChannel: true });
+						channel.permissionOverwrites.edit(role.id, { ViewChannel: true });
+						channel.permissionOverwrites.edit(channel.guild.id, { ViewChannel: false });
 						newChannelId = channel.id;
 					});
 			}
-
-			await interaction.guild.roles.create({ name: capitalize(charName), color: Colors[Math.floor((Math.random * 100) % 29)] });
-
+			// Atribui o cargo ao usuário da interação
+			await interaction.guild.members.fetch(interaction.user.id)
+				.then(member => member.roles.add(role));
 			// Edita a mensagem primeiramente enviada
 			await interaction.editReply({ content:'Canal Criado! Execute o comando /criar-personagem lá ' + getRandomEmoji() });
 			// Função para enviar uma mensagem simples em um canal pelo ID
