@@ -1,12 +1,12 @@
 // eslint-disable-next-line no-unused-vars
-const { Interaction, SlashCommandBuilder, ChannelType, userMention } = require('discord.js');
-const { sendMessage, getRandomEmoji } = require('../../utils');
+const { Interaction, SlashCommandBuilder, ChannelType, userMention, Colors } = require('discord.js');
+const { sendMessage, getRandomEmoji, capitalize } = require('../../utils');
 
 module.exports = {
 	// Define nome, descrição, tamanho min e max, e se é obrigatório
 	data: new SlashCommandBuilder()
 		.setName('criar')
-		.setDescription('comando para criar um personagem de RPG')
+		.setDescription('comando para criar um canal para a criação do personagem de RPG')
 		.addStringOption(option =>
 			option
 				.setName('nome')
@@ -50,7 +50,7 @@ module.exports = {
 				});
 
 				await interaction.guild.channels.create({
-					name: charName,
+					name: capitalize(charName),
 					type: ChannelType.GuildText,
 				})
 					.then(channel => {
@@ -61,7 +61,7 @@ module.exports = {
 			// Se já existir a categoria, so vai criar o canal e mover ele pra categoria
 			else {
 				await interaction.guild.channels.create({
-					name: charName,
+					name: capitalize(charName),
 					type: ChannelType.GuildText,
 				})
 					.then(channel => {
@@ -69,6 +69,9 @@ module.exports = {
 						newChannelId = channel.id;
 					});
 			}
+
+			await interaction.guild.roles.create({ name: capitalize(charName), color: Colors[Math.floor((Math.random * 100) % 29)] });
+
 			// Edita a mensagem primeiramente enviada
 			await interaction.editReply({ content:'Canal Criado! Execute o comando /criar-personagem lá ' + getRandomEmoji() });
 			// Função para enviar uma mensagem simples em um canal pelo ID
