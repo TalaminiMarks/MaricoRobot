@@ -20,6 +20,12 @@ module.exports = {
 		// Objeto para cadastro no banco de dados
 		const characterSchema = {};
 
+		// Schema para validação dos dados
+		const schema = z.object({
+			id: z.string(),
+			name: z.string(),
+		});
+
 		// Variavel para armazenar se o canal da interação e cargo do usuário tem o mesmo nome
 		let validation = false;
 
@@ -46,11 +52,6 @@ module.exports = {
 			const messageFilter = m => m.author.id === interaction.user.id;
 			// Define o Obj com as opções da função awaitMessages
 			const awaitObj = { filter: messageFilter, max: 1, time: 5000, errors: ['time'] };
-			// Schema para validação dos dados
-			const schema = z.object({
-				id: z.string(),
-				name: z.string(),
-			});
 
 			try {
 				// Envia uma pergunta e espera até o usuário mandar uma mensagem como resposta
@@ -76,7 +77,20 @@ module.exports = {
 							});
 					});
 				const data = schema.parse(characterSchema);
-				console.log(data);
+
+				await fetch('http://127.0.0.1:3333/personagem/criar', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(data),
+				}).then(res => {
+					res.json().then(
+						content => {
+							console.log(content);
+						},
+					);
+				});
 			}
 			// Retorna para o usuário se der algum erro durante a execução do comando
 			catch (error) {
