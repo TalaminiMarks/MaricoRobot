@@ -19,9 +19,9 @@
   "author": "TalaminiMarks",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.7.7",
     "discord.js": "^14.16.3",
-    "dotenv": "^16.4.5",
-    "zod": "^3.23.8"
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.1.0",
