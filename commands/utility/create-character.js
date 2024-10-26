@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const { Interaction, SlashCommandBuilder } = require('discord.js');
-const z = require('zod');
-const { getRandomEmoji } = require('../../utils');
+const { getRandomEmoji, axios } = require('../../utils');
 
 module.exports = {
 	// Info basica do comando
@@ -19,12 +18,6 @@ module.exports = {
 
 		// Objeto para cadastro no banco de dados
 		const characterSchema = {};
-
-		// Schema para validação dos dados
-		const schema = z.object({
-			id: z.string(),
-			name: z.string(),
-		});
 
 		// Variavel para armazenar se o canal da interação e cargo do usuário tem o mesmo nome
 		let validation = false;
@@ -55,45 +48,30 @@ module.exports = {
 
 			try {
 				// Envia uma pergunta e espera até o usuário mandar uma mensagem como resposta
-				await interaction.followUp({ content: 'Qual seu nome?' })
+				await interaction.followUp({ content: 'Qual será a sua classe?' })
 					.then(async () => {
 						await interaction.channel.awaitMessages(awaitObj)
 							.then(collected => {
-								// characterSchema.other = collected.first().content;
+								characterSchema.role = collected.first().content;
 							})
 							.catch(() => {
 								throw new Error('Tempo do comando espirado, execute o comando novamente');
 							});
 					});
 				// Envia uma pergunta e espera até o usuário mandar uma mensagem como resposta
-				await interaction.followUp('Qual sua idade?')
+				await interaction.followUp('Qual será seu item inicial?')
 					.then(async () => {
 						await interaction.channel.awaitMessages(awaitObj)
 							.then(collected => {
-								// characterSchema.age = Number(collected.first().content);
+								characterSchema.initial = collected.first().content;
 							})
 							.catch(() => {
 								throw new Error('Tempo do comando espirado, execute o comando novamente');
 							});
 					});
 
-				// Valida o objeto e armazena a opjeto na constante se passar
-				const data = schema.parse(characterSchema);
-
-				// Usa o fetch API (nativo do JS) para fazer um post na url e armazenar os dados no banco de dados
-				await fetch('http://127.0.0.1:3333/personagem/criar', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(data),
-				}).then(res => {
-					res.json().then(
-						content => {
-							console.log(content);
-						},
-					);
-				});
+				axios.post('personagem/criar', characterSchema)
+					.then(res => interaction.followUp(res.data.message));
 			}
 			// Retorna para o usuário se der algum erro durante a execução do comando
 			catch (error) {
