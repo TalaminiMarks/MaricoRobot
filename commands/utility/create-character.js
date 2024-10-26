@@ -70,14 +70,17 @@ module.exports = {
 					.then(async () => {
 						await interaction.channel.awaitMessages(awaitObj)
 							.then(collected => {
-								characterSchema.age = Number(collected.first().content);
+								// characterSchema.age = Number(collected.first().content);
 							})
 							.catch(() => {
 								throw new Error('Tempo do comando espirado, execute o comando novamente');
 							});
 					});
+
+				// Valida o objeto e armazena a opjeto na constante se passar
 				const data = schema.parse(characterSchema);
 
+				// Usa o fetch API (nativo do JS) para fazer um post na url e armazenar os dados no banco de dados
 				await fetch('http://127.0.0.1:3333/personagem/criar', {
 					method: 'POST',
 					headers: {
