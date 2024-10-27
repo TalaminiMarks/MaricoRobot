@@ -42,7 +42,7 @@ module.exports = {
 
 		else {
 			try {
-				const select = new StringSelectMenuBuilder()
+				let select = new StringSelectMenuBuilder()
 					.setPlaceholder('Selecione a sua classe')
 					.setCustomId('class')
 					.addOptions(
@@ -57,24 +57,31 @@ module.exports = {
 						new StringSelectMenuOptionBuilder().setValue('cleric').setLabel('Clérigo').setDescription('Os Clérigos usam os milagres a seu favor'),
 						new StringSelectMenuOptionBuilder().setValue('deprived').setLabel('Depravado').setDescription('Os Depravados não possuem nada ao seu auxilio'),
 					);
-				const row = new ActionRowBuilder().setComponents(select);
+				let row = new ActionRowBuilder().setComponents(select);
 				// Envia uma pergunta e espera até o usuário mandar uma mensagem como resposta
 				await interaction.followUp({ content: 'Qual será a sua classe?', components: [row] });
 
-				// Envia uma pergunta e espera até o usuário mandar uma mensagem como resposta
-				// await interaction.followUp('Qual será seu item inicial?')
-				// 	.then(async () => {
-				// 		await interaction.channel.awaitMessages(awaitObj)
-				// 			.then(collected => {
-				// 				characterSchema.initial = collected.first().content;
-				// 			})
-				// 			.catch(() => {
-				// 				throw new Error('Tempo do comando espirado, execute o comando novamente');
-				// 			});
-				// 	});
+				select = new StringSelectMenuBuilder()
+					.setPlaceholder('Selecione a sua classe')
+					.setCustomId('class')
+					.addOptions(
+						new StringSelectMenuOptionBuilder().setValue('binoculars').setLabel('Binoculos').setDescription('Um Binoculos'),
+						new StringSelectMenuOptionBuilder().setValue('black firebomb').setLabel('Bomba de fogo Negra').setDescription('Uma bomba negra que explode no impacto'),
+						new StringSelectMenuOptionBuilder().setValue('divine blessing').setLabel('Benção Divina').setDescription('Uma água com a benção das divindades'),
+						new StringSelectMenuOptionBuilder().setValue('master key').setLabel('Chave Mestra').setDescription('Um molho de chaves'),
+						new StringSelectMenuOptionBuilder().setValue('old witchs ring').setLabel('Anel antigo da Bruxa').setDescription('Um anel antigo, empoeirado e enferrujado'),
+						new StringSelectMenuOptionBuilder().setValue('pendant').setLabel('Pingente').setDescription('Um pingente com uma figura desenhada'),
+						new StringSelectMenuOptionBuilder().setValue('tiny beings ring').setLabel('Anel Pequenino').setDescription('Um anel pequeno com uma joia vermelha'),
+						new StringSelectMenuOptionBuilder().setValue('twin humanities').setLabel('Humanidade Gemea').setDescription('Duas humanidades interligadas'),
+					);
 
-				// axios.post('personagem/criar', characterSchema)
-				// 	.then(res => interaction.followUp(res.data.message));
+				row = new ActionRowBuilder().setComponents(select);
+
+				// Envia uma pergunta e espera até o usuário mandar uma mensagem como resposta
+				await interaction.followUp({ content: 'Qual será seu item inicial?', components: [row] });
+
+				axios.post('personagem/criar', characterSchema)
+					.then(res => interaction.followUp(res.data.message));
 			}
 			// Retorna para o usuário se der algum erro durante a execução do comando
 			catch (error) {
