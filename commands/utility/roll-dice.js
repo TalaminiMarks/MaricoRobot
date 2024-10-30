@@ -4,11 +4,11 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('rolar-dado')
 		.setDescription('Seleciona um dado para ser rolado')
-		.addStringOption((option) => {
+		.addStringOption(option =>
 			option
-				.setRequired(true)
-				.setName('dado')
+				.setName('input')
 				.setDescription('tipo dos dados')
+				.setRequired(true)
 				.addChoices(
 					{ name: 'D4', value: 'd4' },
 					{ name: 'D6', value: 'd6' },
@@ -17,8 +17,8 @@ module.exports = {
 					{ name: 'D20', value: 'd20' },
 					{ name: 'D100', value: 'd100' },
 					{ name: 'tem dado em casa?', value: 'casa' },
-				);
-		}),
+				),
+		),
 	/**
      * @param {import('discord.js').Interaction} interaction
      */
