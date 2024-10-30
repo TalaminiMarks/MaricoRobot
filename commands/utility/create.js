@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-unused-vars
-const { Interaction, SlashCommandBuilder, ChannelType, userMention, resolveColor } = require('discord.js');
+const { SlashCommandBuilder, ChannelType, userMention, resolveColor } = require('discord.js');
 const { sendMessage, getRandomEmoji, capitalize } = require('../../utils');
 
 module.exports = {
@@ -18,9 +17,8 @@ module.exports = {
 	// Função de execução do comando
 
 	/**
-	 * @param {Interaction} interaction
-	 */
-
+     * @param {import('discord.js').Interaction} interaction
+     */
 	async execute(interaction) {
 		// Começa a interação com o bot mandando uma mensagem
 		await interaction.reply({ content: 'Criando canal...' });

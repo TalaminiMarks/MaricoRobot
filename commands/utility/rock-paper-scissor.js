@@ -18,6 +18,9 @@ module.exports = {
 					{ name: 'Tesoura', value: 'tesoura' },
 				),
 		),
+	/**
+     * @param {import('discord.js').Interaction} interaction
+     */
 	async execute(interaction) {
 		// Deixa uma mensagem temporaria
 		await interaction.deferReply();

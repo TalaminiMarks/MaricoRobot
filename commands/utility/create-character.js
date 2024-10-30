@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-unused-vars
-const { Interaction, SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js');
+const { SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js');
 const { getRandomEmoji, axios } = require('../../utils');
 
 module.exports = {
@@ -9,7 +8,7 @@ module.exports = {
 		.setDescription('Comando para criar o personagem no canal especifico usando o "/criar"'),
 
 	/**
-     * @param {Interaction} interaction
+     * @param {import('discord.js').Interaction} interaction
      */
 	// Função de execução do comando
 	async execute(interaction) {
