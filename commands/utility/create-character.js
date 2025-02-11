@@ -214,8 +214,6 @@ module.exports = {
 						});
 				});
 
-			console.log(character);
-
 			const { data } = await axios.post(
 				'/personagem/criar',
 				character,
