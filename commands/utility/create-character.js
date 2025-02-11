@@ -187,16 +187,54 @@ module.exports = {
 				.setPlaceholder('Selecione a sua classe')
 				.setCustomId('role')
 				.addOptions([
-					new StringSelectMenuOptionBuilder().setValue('guerreiro').setLabel('Guerreiro').setDescription('O Guerreiro combina uma alta força e destreza'),
-					new StringSelectMenuOptionBuilder().setValue('cavaleiro').setLabel('Cavaleiro').setDescription('O Cavaleiro começa com maior vitalidade'),
-					new StringSelectMenuOptionBuilder().setValue('andarilho').setLabel('Andarilho').setDescription('O Andarilho é focado em velocidade e evasão'),
-					new StringSelectMenuOptionBuilder().setValue('ladrao').setLabel('Ladrão').setDescription('Os Ladrões tem alta chance de critico com adaga'),
-					new StringSelectMenuOptionBuilder().setValue('bandido').setLabel('Bandido').setDescription('Os Bandidos são especializados em ataques fisicos fortes'),
-					new StringSelectMenuOptionBuilder().setValue('cacador').setLabel('Caçador').setDescription('Os Caçadores são especialistas em arcos'),
-					new StringSelectMenuOptionBuilder().setValue('feiticeiro').setLabel('Feiticeiro').setDescription('Os Feiticeiros são especialistas em magias'),
-					new StringSelectMenuOptionBuilder().setValue('piromante').setLabel('Piromante').setDescription('Os Piromantes são especialistas em pirotecnias'),
-					new StringSelectMenuOptionBuilder().setValue('clerigo').setLabel('Clérigo').setDescription('Os Clérigos usam os milagres a seu favor'),
-					new StringSelectMenuOptionBuilder().setValue('depravado').setLabel('Depravado').setDescription('Os Depravados não possuem nada ao seu auxilio'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('barbaro')
+						.setLabel('Barbaro')
+						.setDescription('Um feroz guerreiro de origem primitiva.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('bardo')
+						.setLabel('Bardo')
+						.setDescription('Um místico que possui poderes que ecoam a música da criação.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('bruxo')
+						.setLabel('Bruxo')
+						.setDescription('Um portador de magia derivada de barganha.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('clerigo')
+						.setLabel('Clerigo')
+						.setDescription('Um campeão sacerdotal que empunha magia divina.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('druida')
+						.setLabel('Druida')
+						.setDescription('Detentor dos poderes da natureza e capaz de adotar formas animais.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('feiticeiro')
+						.setLabel('Feiticeiro')
+						.setDescription('Um conjurador que possui magia latente.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('guerreiro')
+						.setLabel('Guerreiro')
+						.setDescription('Um perito em uma vasta gama de armas e armaduras.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('ladino')
+						.setLabel('Ladino')
+						.setDescription('Um trapaceiro que utiliza de furtividade e astúcia.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('mago')
+						.setLabel('Mago')
+						.setDescription('Um usuário de magia capaz de manipular as estruturas da realidade.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('monge')
+						.setLabel('Monge')
+						.setDescription('Um mestre das artes marciais.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('paladino')
+						.setLabel('Paladino')
+						.setDescription('Um guerreiro divino vinculado a um juramento sagrado.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('patrulheiro')
+						.setLabel('Patrulheiro')
+						.setDescription('Um guerreiro que utiliza de poderio marcial e magia natural.'),
 				]);
 
 			const roleRow = new ActionRowBuilder().addComponents(role);
@@ -213,6 +251,8 @@ module.exports = {
 							await message.delete();
 						});
 				});
+
+			character.userId = interaction.user.id;
 
 			const { data } = await axios.post(
 				'/personagem/criar',
