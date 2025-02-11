@@ -3,7 +3,7 @@ const { sendMessage, getRandomEmoji, capitalize } = require('../../utils');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('criar')
+		.setName('criar-canal')
 		.setDescription('comando para criar um canal para a criação do personagem de RPG')
 		.addStringOption(option =>
 			option
@@ -21,7 +21,7 @@ module.exports = {
 		await interaction.reply({ content: 'Criando canal...' });
 
 		const charName = interaction.options.getString('nome');
-		const createCategory = '** Criando Personagem **';
+		const createCategory = '** Criacao de personagem **';
 		let categoryId = undefined;
 		let newChannelId = 0;
 
