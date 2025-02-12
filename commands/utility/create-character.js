@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, bold } = require('discord.js');
-const { getRandomEmoji, axios } = require('../../utils');
+const { getRandomEmoji, axios, formatChannelName } = require('../../utils');
 
 function subRaceSelector(race) {
 	const avalibleRace = {
@@ -85,10 +85,11 @@ module.exports = {
 
 		let validation = false;
 
+
 		await interaction.guild.members.fetch(interaction.user.id)
 			.then(member => {
 				member.roles.cache.filter(role => {
-					if (role.name.toLowerCase() === interaction.channel.name) {
+					if (role.name.toLowerCase() === formatChannelName(interaction.channel.name)) {
 						validation = true;
 						character.id = role.id;
 						character.name = role.name;

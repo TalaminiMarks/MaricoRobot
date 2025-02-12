@@ -18,4 +18,12 @@ module.exports = {
 		},
 		timeout: 5000,
 	}),
+	formatChannelName: (s) => {
+		let formatString = '';
+		const strArr = s.split('-');
+		for (let i = 0; i < strArr.length; i++) {
+			formatString += strArr[i] + ' ';
+		}
+		return formatString.trim();
+	},
 };
