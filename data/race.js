@@ -1,52 +1,57 @@
-module.exports = {
-	// races data
+const data = {
 	dwarf: [
-		{ value: 'anao da montanha', desctiption: 'Raça Anão da Montanha' },
-		{ value: 'anao da colina', desctiption: 'Raça Anão da Colina' },
+		{ value: 'anao da montanha', description: 'Raça Anão da Montanha' },
+		{ value: 'anao da colina', description: 'Raça Anão da Colina' },
 	],
 	elf: [
-		{ value: 'alto elfo', desctiption: 'Raça Alto Elfo' },
-		{ value: 'elfo da floresta', desctiption: 'Raça Elfo da Floresta' },
-		{ value: 'elfo negro', desctiption: 'Raça Elfo Negro' },
+		{ value: 'alto elfo', description: 'Raça Alto Elfo' },
+		{ value: 'elfo da floresta', description: 'Raça Elfo da Floresta' },
+		{ value: 'elfo negro', description: 'Raça Elfo Negro' },
 	],
-	hafling: [
-		{ value: 'halfling pes leves', desctiption: 'Raça Halfling Pes Leves' },
-		{ value: 'halfling robusto', desctiption: 'Raça Halfling Robusto' },
+	halfling: [
+		{ value: 'halfling pes leves', description: 'Raça Halfling Pes Leves' },
+		{ value: 'halfling robusto', description: 'Raça Halfling Robusto' },
 	],
 	human: [
-		{ value: 'calishita', desctiption: 'Humano Calishita' },
-		{ value: 'chondathano', desctiption: 'Humano Chondathano' },
-		{ value: 'damarano', desctiption: 'Humano Damarano' },
-		{ value: 'illuskano', desctiption: 'Humano Illuskano' },
-		{ value: 'mulano', desctiption: 'Humano Mulano' },
-		{ value: 'rashemita', desctiption: 'Humano Rashemita' },
-		{ value: 'shou', desctiption: 'Humano Shou' },
-		{ value: 'tethyriano', desctiption: 'Humano Tethyriano' },
-		{ value: 'turami', desctiption: 'Humano Turami' },
+		{ value: 'calishita', description: 'Humano Calishita' },
+		{ value: 'chondathano', description: 'Humano Chondathano' },
+		{ value: 'damarano', description: 'Humano Damarano' },
+		{ value: 'illuskano', description: 'Humano Illuskano' },
+		{ value: 'mulano', description: 'Humano Mulano' },
+		{ value: 'rashemita', description: 'Humano Rashemita' },
+		{ value: 'shou', description: 'Humano Shou' },
+		{ value: 'tethyriano', description: 'Humano Tethyriano' },
+		{ value: 'turami', description: 'Humano Turami' },
 	],
 	dragonborn: [
-		{ value: 'azul', desctiption: 'Ancestral Dracônico Azul' },
-		{ value: 'branco', desctiption: 'Ancestral Dracônico Branco' },
-		{ value: 'bronze', desctiption: 'Ancestral Dracônico Bronze' },
-		{ value: 'cobre', desctiption: 'Ancestral Dracônico Cobre' },
-		{ value: 'latao', desctiption: 'Ancestral Dracônico Latão' },
-		{ value: 'negro', desctiption: 'Ancestral Dracônico Negro' },
-		{ value: 'ouro', desctiption: 'Ancestral Dracônico Ouro' },
-		{ value: 'prata', desctiption: 'Ancestral Dracônico Prata' },
-		{ value: 'verde', desctiption: 'Ancestral Dracônico Verde' },
-		{ value: 'vermelho', desctiption: 'Ancestral Dracônico Vermelho' },
+		{ value: 'azul', description: 'Ancestral Dracônico Azul' },
+		{ value: 'branco', description: 'Ancestral Dracônico Branco' },
+		{ value: 'bronze', description: 'Ancestral Dracônico Bronze' },
+		{ value: 'cobre', description: 'Ancestral Dracônico Cobre' },
+		{ value: 'latao', description: 'Ancestral Dracônico Latão' },
+		{ value: 'negro', description: 'Ancestral Dracônico Negro' },
+		{ value: 'ouro', description: 'Ancestral Dracônico Ouro' },
+		{ value: 'prata', description: 'Ancestral Dracônico Prata' },
+		{ value: 'verde', description: 'Ancestral Dracônico Verde' },
+		{ value: 'vermelho', description: 'Ancestral Dracônico Vermelho' },
 	],
-	gnomo: [
-		{ value: 'gnomo da floresta', desctiption: 'Raça Gnomo da Floresta' },
-		{ value: 'gnomo das rochas', desctiption: 'Raça Gnomo das Rochas' },
+	gnome: [
+		{ value: 'gnomo da floresta', description: 'Raça Gnomo da Floresta' },
+		{ value: 'gnomo das rochas', description: 'Raça Gnomo das Rochas' },
 	],
 	halfElf: [
-		{ value: 'meio elfo', desctiption: 'Raça Meio-Elfo' },
+		{ value: 'meio elfo', description: 'Raça Meio-Elfo' },
 	],
 	halfOrc: [
-		{ value: 'meio orc', desctiption: 'Raça Meio-Orc' },
+		{ value: 'meio orc', description: 'Raça Meio-Orc' },
 	],
 	tiefling: [
-		{ value: 'tiefling', desctiption: 'Raça Tiefling' },
+		{ value: 'tiefling', description: 'Raça Tiefling' },
 	],
+};
+
+module.exports = {
+	getRacesData: (race) => {
+		return data[race];
+	},
 };
