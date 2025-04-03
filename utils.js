@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { StringSelectMenuOptionBuilder } = require('discord.js');
 
 module.exports = {
 	capitalize: (string) => {
@@ -25,5 +26,8 @@ module.exports = {
 			formatString += strArr[i] + ' ';
 		}
 		return formatString.trim();
+	},
+	getSelectOption: (value, desctiption) => {
+		return new StringSelectMenuOptionBuilder().setValue(value).setDescription(desctiption).setLabel(value);
 	},
 };
