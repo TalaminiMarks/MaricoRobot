@@ -1,68 +1,54 @@
 const { SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, bold } = require('discord.js');
-const { getRandomEmoji, axios, formatChannelName } = require('../../utils');
+const { getRandomEmoji, axios, formatChannelName, getSelectOption } = require('../../utils');
+const { dwarf, elf, dragonborn, gnomo, hafling, halfElf, halfOrc, human, tiefling } = require('../../data/race');
 
 function subRaceSelector(race) {
 	const avalibleRace = {
 		anao: () => {
-			return [
-				new StringSelectMenuOptionBuilder().setValue('anao da montanha').setDescription('raça Anão da Montanha').setLabel('Anão da Montanha'),
-				new StringSelectMenuOptionBuilder().setValue('anao da colina').setDescription('raça Anão da Colina').setLabel('Anão da Colina'),
-			];
+			return dwarf.map((item) => {
+				return getSelectOption(item.value, item.desctiption);
+			});
+
 		},
 		elfo: () => {
-			return [
-				new StringSelectMenuOptionBuilder().setValue('alto elfo').setDescription('raça Alto Elfo').setLabel('Alto Elfo'),
-				new StringSelectMenuOptionBuilder().setValue('elfo da floresta').setDescription('raça Elfo da Floresta').setLabel('Elfo da Floresta'),
-				new StringSelectMenuOptionBuilder().setValue('elfo negro').setDescription('raça Elfo Negro').setLabel('Elfo Negro'),
-			];
+			return elf.map((item) => {
+				return getSelectOption(item.value, item.desctiption);
+			});
 		},
 		halfling: () => {
-			return [
-				new StringSelectMenuOptionBuilder().setValue('halfling pes leves').setDescription('raça Halfling Pes Leves').setLabel('Halfling Pes Leves'),
-				new StringSelectMenuOptionBuilder().setValue('halfling robusto').setDescription('raça Halfling Robusto').setLabel('Halfling Robusto'),
-			];
+			return hafling.map((item) => {
+				return getSelectOption(item.value, item.desctiption);
+			});
 		},
 		humano: () => {
-			return [
-				new StringSelectMenuOptionBuilder().setValue('calishita').setDescription('Humano Calishita').setLabel('Calishita'),
-				new StringSelectMenuOptionBuilder().setValue('chondathano').setDescription('Humano Chondathano').setLabel('Chondathano'),
-				new StringSelectMenuOptionBuilder().setValue('damarano').setDescription('Humano Damarano').setLabel('Damarano'),
-				new StringSelectMenuOptionBuilder().setValue('illuskano').setDescription('Humano Illuskano').setLabel('Illuskano'),
-				new StringSelectMenuOptionBuilder().setValue('mulano').setDescription('Humano Mulano').setLabel('Mulano'),
-				new StringSelectMenuOptionBuilder().setValue('rashemita').setDescription('Humano Rashemita').setLabel('Rashemita'),
-				new StringSelectMenuOptionBuilder().setValue('shou').setDescription('Humano Shou').setLabel('Shou'),
-				new StringSelectMenuOptionBuilder().setValue('tethyriano').setDescription('Humano Tethyriano').setLabel('Tethyriano'),
-				new StringSelectMenuOptionBuilder().setValue('turami').setDescription('Humano Turami').setLabel('Turami'),
-			];
+			return human.map((item) => {
+				return getSelectOption(item.value, item.desctiption);
+			});
 		},
 		draconato: () => {
-			return [
-				new StringSelectMenuOptionBuilder().setValue('azul').setDescription('Ancestral Dracônico Azul').setLabel('Azul'),
-				new StringSelectMenuOptionBuilder().setValue('branco').setDescription('Ancestral Dracônico Branco').setLabel('Branco'),
-				new StringSelectMenuOptionBuilder().setValue('Bronze').setDescription('Ancestral Dracônico Bronze').setLabel('Bronze'),
-				new StringSelectMenuOptionBuilder().setValue('cobre').setDescription('Ancestral Dracônico Cobre').setLabel('Cobre'),
-				new StringSelectMenuOptionBuilder().setValue('latao').setDescription('Ancestral Dracônico Latao').setLabel('Latao'),
-				new StringSelectMenuOptionBuilder().setValue('negro').setDescription('Ancestral Dracônico Negro').setLabel('Negro'),
-				new StringSelectMenuOptionBuilder().setValue('ouro').setDescription('Ancestral Dracônico Ouro').setLabel('Ouro'),
-				new StringSelectMenuOptionBuilder().setValue('prata').setDescription('Ancestral Dracônico Prata').setLabel('Prata'),
-				new StringSelectMenuOptionBuilder().setValue('verde').setDescription('Ancestral Dracônico Verde').setLabel('Verde'),
-				new StringSelectMenuOptionBuilder().setValue('vermelho').setDescription('Ancestral Dracônico Vermelho').setLabel('Vermelho'),
-			];
+			return dragonborn.map((item) => {
+				return getSelectOption(item.value, item.desctiption);
+			});
 		},
 		gnomo: () => {
-			return [
-				new StringSelectMenuOptionBuilder().setValue('gnomo da floresta').setDescription('raça Gnomo da Floresta').setLabel('Gnomo da Floresta'),
-				new StringSelectMenuOptionBuilder().setValue('gnomo das rochas').setDescription('raça Gnomo das Rochas').setLabel('Gnomo das Rochas'),
-			];
+			return gnomo.map((item) => {
+				return getSelectOption(item.value, item.desctiption);
+			});
 		},
 		meioElfo: () => {
-			return new StringSelectMenuOptionBuilder().setValue('meioElfo').setDescription('raça Meio-Elfo').setLabel('Meio-Elfo');
+			return halfElf.map((item) => {
+				return getSelectOption(item.value, item.desctiption);
+			});
 		},
 		meioOrc: () => {
-			return new StringSelectMenuOptionBuilder().setValue('meioOrc').setDescription('raça Meio-Orc').setLabel('Meio-Orc');
+			return halfOrc.map((item) => {
+				return getSelectOption(item.value, item.desctiption);
+			});
 		},
 		tiefling: () => {
-			return new StringSelectMenuOptionBuilder().setValue('tiefling').setDescription('raça Tiefling').setLabel('Tiefling');
+			return tiefling.map((item) => {
+				return getSelectOption(item.value, item.desctiption);
+			});
 		},
 	};
 	const getRaces = avalibleRace[race];
