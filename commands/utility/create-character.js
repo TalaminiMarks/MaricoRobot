@@ -1,11 +1,12 @@
 const { SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, bold } = require('discord.js');
 const { getRandomEmoji, axios, formatChannelName, getSelectOption } = require('../../utils');
 const { getRacesData } = require('../../data/race');
+const { getRoleData } = require('../../data/role');
 
 function subRaceSelector(race) {
 	const data = getRacesData(race);
 	return data.map((item) => {
-		return getSelectOption(item.value, item.description);
+		return getSelectOption(item.value, item.description, item.label);
 	});
 }
 
@@ -66,15 +67,42 @@ module.exports = {
 				.setPlaceholder('Selecione sua raça')
 				.setCustomId('baseRace')
 				.addOptions([
-					new StringSelectMenuOptionBuilder().setValue('dwarf').setDescription('raça Anão').setLabel('Anão'),
-					new StringSelectMenuOptionBuilder().setValue('elf').setDescription('raça Elfo').setLabel('Elfo'),
-					new StringSelectMenuOptionBuilder().setValue('halfling').setDescription('raça Halfling').setLabel('Halfling'),
-					new StringSelectMenuOptionBuilder().setValue('human').setDescription('raça Humano').setLabel('Humano'),
-					new StringSelectMenuOptionBuilder().setValue('dragonborn').setDescription('raça Draconato').setLabel('Draconato'),
-					new StringSelectMenuOptionBuilder().setValue('gnome').setDescription('raça Gnomo').setLabel('Gnomo'),
-					new StringSelectMenuOptionBuilder().setValue('halfElf').setDescription('raça Meio-Elfo').setLabel('Meio-elfo'),
-					new StringSelectMenuOptionBuilder().setValue('halfOrc').setDescription('raça Meio-Orc').setLabel('Meio-Orc'),
-					new StringSelectMenuOptionBuilder().setValue('tiefling').setDescription('raça Tiefling').setLabel('Tiefling'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('dwarf')
+						.setDescription('raça Anão')
+						.setLabel('Anão'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('elf')
+						.setDescription('raça Elfo')
+						.setLabel('Elfo'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('halfling')
+						.setDescription('raça Halfling')
+						.setLabel('Halfling'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('human')
+						.setDescription('raça Humano')
+						.setLabel('Humano'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('dragonborn')
+						.setDescription('raça Draconato')
+						.setLabel('Draconato'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('gnome')
+						.setDescription('raça Gnomo')
+						.setLabel('Gnomo'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('halfElf')
+						.setDescription('raça Meio-Elfo')
+						.setLabel('Meio-elfo'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('halfOrc')
+						.setDescription('raça Meio-Orc')
+						.setLabel('Meio-Orc'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('tiefling')
+						.setDescription('raça Tiefling')
+						.setLabel('Tiefling'),
 				]);
 
 			const baseRaceRow = new ActionRowBuilder().addComponents(baseRace);
@@ -123,83 +151,86 @@ module.exports = {
 						});
 				});
 
-			// const role = new StringSelectMenuBuilder()
-			// 	.setPlaceholder('Selecione a sua classe')
-			// 	.setCustomId('role')
-			// 	.addOptions([
-			// 		new StringSelectMenuOptionBuilder()
-			// 			.setValue('barbaro')
-			// 			.setLabel('Barbaro')
-			// 			.setDescription('Um feroz guerreiro de origem primitiva.'),
-			// 		new StringSelectMenuOptionBuilder()
-			// 			.setValue('bardo')
-			// 			.setLabel('Bardo')
-			// 			.setDescription('Um místico que possui poderes que ecoam a música da criação.'),
-			// 		new StringSelectMenuOptionBuilder()
-			// 			.setValue('bruxo')
-			// 			.setLabel('Bruxo')
-			// 			.setDescription('Um portador de magia derivada de barganha.'),
-			// 		new StringSelectMenuOptionBuilder()
-			// 			.setValue('clerigo')
-			// 			.setLabel('Clerigo')
-			// 			.setDescription('Um campeão sacerdotal que empunha magia divina.'),
-			// 		new StringSelectMenuOptionBuilder()
-			// 			.setValue('druida')
-			// 			.setLabel('Druida')
-			// 			.setDescription('Detentor dos poderes da natureza e capaz de adotar formas animais.'),
-			// 		new StringSelectMenuOptionBuilder()
-			// 			.setValue('feiticeiro')
-			// 			.setLabel('Feiticeiro')
-			// 			.setDescription('Um conjurador que possui magia latente.'),
-			// 		new StringSelectMenuOptionBuilder()
-			// 			.setValue('guerreiro')
-			// 			.setLabel('Guerreiro')
-			// 			.setDescription('Um perito em uma vasta gama de armas e armaduras.'),
-			// 		new StringSelectMenuOptionBuilder()
-			// 			.setValue('ladino')
-			// 			.setLabel('Ladino')
-			// 			.setDescription('Um trapaceiro que utiliza de furtividade e astúcia.'),
-			// 		new StringSelectMenuOptionBuilder()
-			// 			.setValue('mago')
-			// 			.setLabel('Mago')
-			// 			.setDescription('Um usuário de magia capaz de manipular as estruturas da realidade.'),
-			// 		new StringSelectMenuOptionBuilder()
-			// 			.setValue('monge')
-			// 			.setLabel('Monge')
-			// 			.setDescription('Um mestre das artes marciais.'),
-			// 		new StringSelectMenuOptionBuilder()
-			// 			.setValue('paladino')
-			// 			.setLabel('Paladino')
-			// 			.setDescription('Um guerreiro divino vinculado a um juramento sagrado.'),
-			// 		new StringSelectMenuOptionBuilder()
-			// 			.setValue('patrulheiro')
-			// 			.setLabel('Patrulheiro')
-			// 			.setDescription('Um guerreiro que utiliza de poderio marcial e magia natural.'),
-			// 	]);
+			const role = new StringSelectMenuBuilder()
+				.setPlaceholder('Selecione a sua classe')
+				.setCustomId('role')
+				.addOptions([
+					new StringSelectMenuOptionBuilder()
+						.setValue('barbarian')
+						.setLabel('Barbaro')
+						.setDescription('Um feroz guerreiro de origem primitiva.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('bard')
+						.setLabel('Bardo')
+						.setDescription('Um místico que possui poderes que ecoam a música da criação.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('warlock')
+						.setLabel('Bruxo')
+						.setDescription('Um portador de magia derivada de barganha.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('cleric')
+						.setLabel('Clerigo')
+						.setDescription('Um campeão sacerdotal que empunha magia divina.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('druid')
+						.setLabel('Druida')
+						.setDescription('Detentor dos poderes da natureza e capaz de adotar formas animais.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('sorcerer')
+						.setLabel('Feiticeiro')
+						.setDescription('Um conjurador que possui magia latente.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('fighter')
+						.setLabel('Guerreiro')
+						.setDescription('Um perito em uma vasta gama de armas e armaduras.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('rogue')
+						.setLabel('Ladino')
+						.setDescription('Um trapaceiro que utiliza de furtividade e astúcia.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('mage')
+						.setLabel('Mago')
+						.setDescription('Um usuário de magia capaz de manipular as estruturas da realidade.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('monk')
+						.setLabel('Monge')
+						.setDescription('Um mestre das artes marciais.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('paladin')
+						.setLabel('Paladino')
+						.setDescription('Um guerreiro divino vinculado a um juramento sagrado.'),
+					new StringSelectMenuOptionBuilder()
+						.setValue('ranger')
+						.setLabel('Patrulheiro')
+						.setDescription('Um guerreiro que utiliza de poderio marcial e magia natural.'),
+				]);
 
-			// const roleRow = new ActionRowBuilder().addComponents(role);
+			const roleRow = new ActionRowBuilder().addComponents(role);
 
-			// await interaction.followUp({
-			// 	content: 'Qual a sua classe?',
-			// 	withResponse: true,
-			// 	components: [roleRow],
-			// })
-			// 	.then(async message => {
-			// 		await message.awaitMessageComponent({ filter: componentfilter, time: RESPONSE_TIME, errors: ['time'] })
-			// 			.then(async collected => {
-			// 				character.role = collected.values.toString();
-			// 				await message.delete();
-			// 			});
-			// 	});
+			await interaction.followUp({
+				content: 'Qual a sua classe?',
+				withResponse: true,
+				components: [roleRow],
+			})
+				.then(async message => {
+					await message.awaitMessageComponent({ filter: componentfilter, time: RESPONSE_TIME, errors: ['time'] })
+						.then(async collected => {
+							const roleSelected = collected.values.toString();
+							character.role = getRoleData(roleSelected);
+							await message.delete();
+						});
+				});
 
-			// character.userId = interaction.user.id;
+			character.userId = interaction.user.id;
+
+			console.log(character);
 
 			// const { data } = await axios.post(
 			// 	'/personagem/criar',
 			// 	character,
 			// );
 
-			// interaction.channel.send(data.message);
+			interaction.channel.send(character);
 		};
 	},
 };
