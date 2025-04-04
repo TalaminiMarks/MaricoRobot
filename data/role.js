@@ -1,0 +1,222 @@
+const data = {
+	barbarian: {
+		hpDice: '1d12',
+		health: 12,
+		proficience: {
+			armors: ['armadura leve', 'armadura media', 'escudo'],
+			weapons: ['armas Simples', 'armas marciais'],
+			tools: null,
+			attributes: ['forca', 'constituicao'],
+			expertise: ['adestrar animais', 'atletismo', 'intimidacao', 'natureza', 'percepcao', 'sobrevivencia'],
+			expertiseAmount: 2,
+			items: [
+				{ first: 'machado grande', second: 'arma marcial corpo-a-corpo' },
+				{ first: 'dois machados de mão', second: 'arma simples' },
+				['pacote de aventureiro', 'quatro azagaias'],
+			],
+		},
+	},
+	bard: {
+		hpDice: '1d8',
+		health: 8,
+		proficience: {
+			armors: 'armadura leve',
+			weapons: ['armas simples', 'bestas de mao', 'espadas longas', 'rapieiras', 'espadas curtas'],
+			tools: 'tres instrumentos musicais',
+			attributes: ['destreza', 'carisma'],
+			expertise: 'quaisquer',
+			expertiseAmount: 3,
+			items: [
+				{ first: 'rapierira', second: 'espada longa', third: 'arma simples' },
+				{ first: 'pacode de diplomata', second: 'pacote de artista' },
+				{ first: 'lute', second: 'instrumento musical' },
+				['armadura de couro', 'adaga'],
+			],
+		},
+	},
+	warlock: {
+		hpDice: '1d8',
+		health: 8,
+		proficience: {
+			armors: 'armadura leve',
+			weapons: 'armas simples',
+			tools: null,
+			attributes: ['sabedoria', 'carisma'],
+			expertise: ['arcanismo', 'enganacao', 'historia', 'intimidacao', 'investigacao', 'natureza', 'religiao'],
+			expertiseAmount: 2,
+			items: [
+				{ first: 'besta leve e 20 virotes', second: 'arma simples' },
+				{ first: 'bolsa de componentes', second: 'foco arcano' },
+				{ first: 'pacote de estudioso', second: 'pacote de explorador' },
+				['armadura de couro', 'arma simples', 'duas adagas'],
+			],
+		},
+	},
+	cleric: {
+		hpDice: '1d8',
+		health: 8,
+		proficience: {
+			armors: ['armadura leve', 'armaduras medias', 'escudos'],
+			weapons: 'armas simples',
+			tools: null,
+			attributes: ['sabedoria', 'carisma'],
+			expertise: ['historia', 'intuicao', 'medicina', 'persuasão', 'religiao'],
+			expertiseAmount: 2,
+			items: [
+				{ first: 'maça', second: 'martelo de guerra' },
+				{ first: 'brunea', second: 'armadura de couro', third: 'cota de malha' },
+				{ first: 'besta leve e 20 virotes', second: 'arma simples' },
+				{ first: 'pacote de sacerdote', second: 'pacote de aventureiro' },
+				['escudo', 'simbolo sagrado'],
+			],
+		},
+	},
+	druid: {
+		hpDice: '1d8',
+		health: 8,
+		proficience: {
+			armors: ['armadura leve', 'armaduras medias', 'escudos'],
+			weapons: ['clavas', 'adagas', 'dardos', 'azagaias', 'maças', 'bordoes', 'cimitarras', 'foices', 'fundas', 'lanças'],
+			tools: 'kit de herbalismo',
+			attributes: ['sabedoria', 'inteligencia'],
+			expertise: ['arcanismo', 'adestrar animais', 'intuicao', 'medicina', 'natureza', 'percepcao', 'religiao', 'sobrevivencia'],
+			expertiseAmount: 2,
+			items: [
+				{ first: 'escudo de madeira', second: 'arma simples' },
+				{ first: 'cimitarra', second: 'arma corpo-a-corpo simples' },
+				{ first: 'pacote de estudioso', second: 'pacote de explorador' },
+				['armadura de couro', 'pacote de aventureiro', 'foco druidico'],
+			],
+		},
+	},
+	sorcerer: {
+		hpDice: '1d6',
+		health: 6,
+		proficience: {
+			armors: null,
+			weapons: ['adagas', 'fundas', 'bordoes', 'besta leve'],
+			tools: null,
+			attributes: ['constuicao', 'carisma'],
+			expertise: ['arcanismo', 'enganacao', 'intuicao', 'intimidacao', 'persuasao', 'religiao'],
+			expertiseAmount: 2,
+			items: [
+				{ first: 'besta leve e 20 virotes', second: 'arma simples' },
+				{ first: 'bolsa de componentes', second: 'foco arcano' },
+				{ first: 'pacote de aventureiro', second: 'pacote de explorador' },
+			],
+		},
+	},
+	fighter: {
+		hpDice: '1d10',
+		health: 10,
+		proficience: {
+			armors: ['todas armaduras', 'escudos'],
+			weapons: ['armas simples', 'armas marciais'],
+			tools: null,
+			attributes: ['constuicao', 'forca'],
+			expertise: ['acrobacia', 'adestrar animais', 'atletismo', 'historia', 'intuicao', 'intimidacao', 'percepcao', 'sobrevivencia'],
+			expertiseAmount: 2,
+			items: [
+				{ first: 'cota de malha', second: 'gibao de peles, arco longo e 20 flechas' },
+				{ first: 'arma marcias e um escudo', second: 'duas armas marciais' },
+				{ first: 'besta leve e 20 virotes', second: 'dois machados de arremesso' },
+				{ first: 'pacote de aventureiro', second: 'pacote de explorador' },
+			],
+		},
+	},
+	rogue: {
+		hpDice: '1d8',
+		health: 8,
+		proficience: {
+			armors: 'armadura leve',
+			weapons: ['armas simples', 'besta de mão', 'espadas longas', 'rapieiras', 'espadas curtas'],
+			tools: 'ferramentas de ladrao',
+			attributes: ['destreza', 'inteligencia'],
+			expertise: ['acrobacia', 'atletismo', 'enganacao', 'furtividade', 'intimidacao', 'intuicao', 'investigacao', 'percepcao', 'persuasao', 'prestiditacao'],
+			expertiseAmount: 4,
+			items: [
+				{ first: 'rapieira', second: 'espada longa' },
+				{ first: 'arco curto e uma aljava com 20 flechas', second: 'espada curta' },
+				{ first: 'pacote de assaltante', second: 'pacote de aventureiro', third: 'pacote de explorador' },
+				['armadura de couro', 'duas adagas', 'ferramentas de ladrao'],
+			],
+		},
+	},
+	mage: {
+		hpDice: '1d6',
+		health: 6,
+		proficience: {
+			armors: null,
+			weapons: ['adagas', 'dardos', 'fundas', 'bordoes', 'bestas leves'],
+			tools: null,
+			attributes: ['sadedoria', 'inteligencia'],
+			expertise: ['arcanismo', 'historia', 'intuicao', 'investigacao', 'medicina', 'religiao'],
+			expertiseAmount: 2,
+			items: [
+				{ first: 'bordao', second: 'adaga' },
+				{ first: 'bolsa de componentes', second: 'foco arcano' },
+				{ first: 'pacote de estudioso', second: 'pacote de explorador' },
+				'grimório',
+			],
+		},
+	},
+	monk: {
+		hpDice: '1d8',
+		health: 8,
+		proficience: {
+			armors: null,
+			weapons: ['armas simples', 'espada curta'],
+			tools: 'ferramenta de artesao ou instrumento musical',
+			attributes: ['forca', 'destreza'],
+			expertise: ['acrobacia', 'atletismo', 'furtividade', 'historia', 'intuicao', 'religiao'],
+			expertiseAmount: 2,
+			items: [
+				{ first: 'espada curta', second: 'arma simples' },
+				{ first: 'pacote de explorador', second: 'pacote de aventureiro' },
+				'10 dardos',
+			],
+		},
+	},
+	paladin: {
+		hpDice: '1d10',
+		health: 10,
+		proficience: {
+			armors: ['todas as armaduras', 'escudos'],
+			weapons: ['armas simples', 'armas marciais'],
+			tools: null,
+			attributes: ['sabedoria', 'carisma'],
+			expertise: ['atletismo', 'intuicao', 'intimidacao', 'medicina', 'persuasao', 'religiao'],
+			expertiseAmount: 2,
+			items: [
+				{ first: 'arma marcial e escudo', second: 'duas arma marcial' },
+				{ first: 'cinco azagaia', second: 'arma simples corpo-a-corpo' },
+				{ first: 'pacote de sacerdote', second: 'pacote de aventureiro' },
+				['cota de malha', 'simbolo sagrado'],
+			],
+		},
+	},
+	ranger: {
+		hpDice: '1d10',
+		health: 10,
+		proficience: {
+			armors: ['armadura leves', 'armaduras medias', 'escudos'],
+			weapons: ['armas simples', 'armas marciais'],
+			tools: null,
+			attributes: ['força', 'destreza'],
+			expertise: ['adestrar animais', 'atletismo', 'furtividade', 'intuicao', 'investigacao', 'natureza', 'percepcao', 'sobrevivencia'],
+			expertiseAmount: 3,
+			items: [
+				{ first: 'brunea', second: 'armdura de couro' },
+				{ first: 'duas espadas curtas', second: 'duas armas simples corpo-a-corpo' },
+				{ first: 'pacote de explorador', second: 'pacote de aventureiro' },
+				['arco longo', 'aljava com 20 flechas'],
+			],
+		},
+	},
+};
+
+module.exports = {
+	getRoleData: (role) => {
+		return data[role];
+	},
+};
