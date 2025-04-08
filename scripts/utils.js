@@ -27,7 +27,7 @@ module.exports = {
 		}
 		return formatString.trim();
 	},
-	getSelectOption: (value, desctiption) => {
-		return new StringSelectMenuOptionBuilder().setValue(value).setDescription(desctiption).setLabel(value);
+	getSelectOption: (value, desctiption, label) => {
+		return new StringSelectMenuOptionBuilder().setValue(value).setDescription(desctiption).setLabel(label);
 	},
 };
