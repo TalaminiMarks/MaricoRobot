@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from 'discord.js';
 
 export const data = new SlashCommandBuilder()
 	.setName('ping')
-	.setDescription('Responde com Pong!');
+	.setDescription('Pong!');
 
 /**
 * @param {import('discord.js').Interaction} interaction
