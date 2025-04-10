@@ -13,7 +13,7 @@ async function loadFolder(path) {
 
 	const modules = files
 		.filter(file => file.endsWith('.mjs'))
-		.forEach(async file => {
+		.map(async file => {
 			const command = await import(pathToFileURL(join(folderPath, file)));
 			if ('data' in command && 'execute' in command) {
 				return command;
