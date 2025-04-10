@@ -1,4 +1,4 @@
-import { axios } from 'axios';
+import axios from 'axios';
 import { StringSelectMenuOptionBuilder } from 'discord.js';
 
 export function	capitalize(string) {
