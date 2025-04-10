@@ -9,9 +9,9 @@
     "node": ">=18.x"
   },
   "scripts": {
-    "dev": "nodemon src/app.js",
-    "register": "node deploy-commands.js",
-    "start": "node src/app.js"
+    "dev": "nodemon src/app.mjs",
+    "register": "node src/scripts/deploy-commands.mjs",
+    "start": "node src/app.mjs"
   },
   "keywords": [
     "discord",
