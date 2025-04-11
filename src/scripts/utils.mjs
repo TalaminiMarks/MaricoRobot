@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { StringSelectMenuOptionBuilder } from 'discord.js';
-import figletModule from 'figlet';
 
 export function	capitalize(string) {
 	return string.charAt(0).toUpperCase() + string.slice(1);
@@ -34,30 +33,4 @@ export function formatChannelName(s) {
 
 export function getSelectOption(value, desctiption, label) {
 	return new StringSelectMenuOptionBuilder().setValue(value).setDescription(desctiption).setLabel(label);
-}
-
-export async function getFontsFiglet() {
-	new Promise((resolve, reject) => {
-		figletModule.fonts((error, fontList) => {
-			if (error) {
-				console.error('something went wrong');
-				reject(error);
-				return;
-			}
-			resolve(fontList);
-		});
-	});
-}
-
-export async function figlet(text, options) {
-	new Promise((resolve, reject) => {
-		figletModule(text, options, (error, result) => {
-			if (error) {
-				console.error('Something went wrong');
-				reject(error);
-				return;
-			}
-			resolve(result);
-		});
-	});
 }
